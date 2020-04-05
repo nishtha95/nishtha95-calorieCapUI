@@ -1,0 +1,28 @@
+h1,a{
+    text-align: center;
+    
+}
+button{
+    margin-left: 120px;
+}
+form{
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+   outline: black;
+}
+div{
+    margin-top: 50px;
+    padding-top:5px;
+}
+input {
+    margin-top: auto;
+    float:left;
+    width:300px;
+    height: 20px;
+    border-radius: 5px;
+}
+.centerdiv{
+    background-color: powderblue;
+}

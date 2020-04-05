@@ -1,0 +1,76 @@
+
+ <app-logout></app-logout>
+ <div class="addButton">
+  <button  (click)="addMeal()" class="btn btn-primary"><mat-icon>add</mat-icon></button>
+</div>
+<div class="addButton">
+  <button  (click)="editSetting()" class="btn btn-primary"><mat-icon>settings</mat-icon></button>
+</div>
+<div>
+
+ <div class="add">
+   
+        
+        <form focusInvalidInput [formGroup]="dateForm" class="add" (ngSubmit)="onSubmit()">
+            
+            <div class="row">
+            <div class="col-md-4">
+            <mat-form-field>
+                <input matInput placeholder="From Date" [matDatepicker]="picker1" formControlName="from">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <mat-form-field>
+                    <input matInput placeholder="To Date" [matDatepicker]="picker2" formControlName="to">
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+                  </mat-form-field>
+            </div>
+            <div class="col-md-4">
+            <div class="form-group">
+                <button class="btn btn-primary">SUBMIT</button>
+            </div>
+            </div>
+            </div>
+        </form>
+    <table class="panel">
+       
+       <tbody>
+          <tr *ngFor="let item of items" >
+             
+             <mat-expansion-panel  class="panel">
+                <mat-expansion-panel-header>
+                  
+                  <mat-panel-description [ngClass]="item.totalCalorieCount <= item.expectedCalorieCount ? 'green': 'red'">
+                    <td>{{ item.date| date}}</td>
+                    <td><span *ngFor="let meal of item.meals">{{ meal.description }},  </span></td>
+                    <td>{{ item.totalCalorieCount }}</td>
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <tr *ngFor="let meal of item.meals">
+                <td>{{ meal.description}}</td>
+                <td>{{ meal.calorieCount }}</td>
+                <td><button (click)="updateMeal(meal)" class="btn btn-primary"><mat-icon>edit</mat-icon></button></td>
+                <td><button (click)="deleteMeal(meal)" class="btn btn-primary"><mat-icon>delete</mat-icon></button></td>
+                </tr>
+              </mat-expansion-panel>
+          </tr>
+       </tbody>
+    </table>
+    
+
+ <div class="dialog" *ngIf="enterExpected">
+  <form focusInvalidInput [formGroup]="form" (ngSubmit)="onSettingChange()">
+   
+    <div class="form-group">
+        <input type="number" formControlName="expectedCalorieCount" placeholder="Suggested Calorie Count"
+            class="form-control" />
+
+    </div>
+    <div >
+        <button class="btn btn-primary">Submit</button>
+    </div>
+</form>
+</div>

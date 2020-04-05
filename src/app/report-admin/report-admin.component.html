@@ -1,0 +1,60 @@
+<app-logout></app-logout>
+ <div class="addButton">
+  <button  (click)="return()" class="btn btn-primary"><mat-icon>home</mat-icon></button>
+</div>
+<form focusInvalidInput [formGroup]="dateForm" (ngSubmit)="onSubmit()">
+            
+    <div class="row">
+    <div class="col-md-3">
+    <mat-form-field>
+        <input matInput placeholder="From Date" [matDatepicker]="picker1" formControlName="from">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="col-md-3">
+        <mat-form-field>
+            <input matInput placeholder="To Date" [matDatepicker]="picker2" formControlName="to">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+    </div>
+    <div class="col-md-3">
+        <mat-form-field>
+            <mat-select (selectionChange)="changeUsername($event.value)" formControlName="username">
+              <mat-option *ngFor="let user of users" [value]="user">
+                {{user.username}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+    </div>
+    <div class="col-md-3">
+    <div class="form-group">
+        <button class="btn btn-primary">SUBMIT</button>
+    </div>
+    </div>
+    </div>
+</form>
+<table class="panel">
+       
+    <tbody>
+       <tr *ngFor="let item of items" >
+          
+          <mat-expansion-panel  class="panel">
+             <mat-expansion-panel-header>
+               
+               <mat-panel-description [ngClass]="item.totalCalorieCount <= item.expectedCalorieCount ? 'green': 'red'">
+                 <td>{{ item.date| date}}</td>
+                 <td><span *ngFor="let meal of item.meals">{{ meal.description }},  </span></td>
+                 <td>{{ item.totalCalorieCount }}</td>
+               </mat-panel-description>
+             </mat-expansion-panel-header>
+             <tr *ngFor="let meal of item.meals">
+             <td>{{ meal.description}}</td>
+             <td>{{ meal.calorieCount }}</td>
+             </tr>
+           </mat-expansion-panel>
+       </tr>
+    </tbody>
+ </table>
+ 

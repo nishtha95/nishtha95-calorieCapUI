@@ -1,0 +1,62 @@
+<app-logout></app-logout>
+
+<div class="add">
+
+    <button (click)="showDateForm()" mat-button class="addButton btn btn-primary"><mat-icon>delete</mat-icon><mat-icon>restaurant_menu</mat-icon></button>
+    <button (click)="showMeals()" class="addButton btn btn-primary" mat-button><mat-icon>restaurant_menu</mat-icon></button>
+    <button (click)="showUsers()" class="addButton btn btn-primary" mat-button><mat-icon>list</mat-icon></button>
+    <table *ngIf="show">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>User Name</th>
+                <th>Email</th>
+                <th>Remove User</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users">
+
+                <td>{{ user.firstName}}</td>
+                <td>{{ user.lastName }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td><button (click)="deleteUser(user)"><mat-icon>delete</mat-icon></button></td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <form focusInvalidInput [formGroup]="dateForm" (ngSubmit)="onSubmit()" *ngIf="showForm">
+            
+            <div class="row">
+            <div class="col-md-3">
+            <mat-form-field>
+                <input matInput placeholder="From Date" [matDatepicker]="picker1" formControlName="from">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="col-md-3">
+                <mat-form-field>
+                    <input matInput placeholder="To Date" [matDatepicker]="picker2" formControlName="to">
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+                  </mat-form-field>
+            </div>
+            <div class="col-md-3">
+                <mat-form-field>
+                    <mat-select #matSelect (selectionChange)="changeUsername($event.value)" formControlName="username">
+                      <mat-option *ngFor="let user of allUsers" [value]="user">
+                        {{user.username}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+            </div>
+            <div class="col-md-3">
+            <div class="form-group">
+                <button class="btn btn-primary">SUBMIT</button>
+            </div>
+            </div>
+            </div>
+        </form>
