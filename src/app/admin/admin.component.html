@@ -28,7 +28,7 @@
     </table>
     
     <form focusInvalidInput [formGroup]="dateForm" (ngSubmit)="onSubmit()" *ngIf="showForm">
-            
+            <h3>Submit form to delete meal recordes of one/more user</h3>
             <div class="row">
             <div class="col-md-3">
             <mat-form-field>
@@ -55,7 +55,7 @@
             </div>
             <div class="col-md-3">
             <div class="form-group">
-                <button class="btn btn-primary">SUBMIT</button>
+                <button class="btn btn-primary"><mat-icon>delete</mat-icon></button>
             </div>
             </div>
             </div>
